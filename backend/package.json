@@ -1,0 +1,52 @@
+{
+  "name": "elevate-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ELEVATE Platform backend (Node.js + Express + TypeScript)",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc -p .",
+    "start": "node dist/server.js",
+    "postbuild": "prisma generate --no-engine",
+    "deploy": "npm run build && npm run start",
+    "prisma:generate": "prisma generate --no-engine",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "prisma:deploy": "prisma db push --accept-data-loss"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.18.0",
+    "@prisma/extension-accelerate": "^1.2.1",
+    "@types/bcrypt": "^6.0.0",
+    "@types/socket.io": "^3.0.1",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.8.0",
+    "cors": "^2.8.5",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.3.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "puppeteer": "^24.26.1",
+    "resend": "^6.3.0",
+    "socket.io": "^4.8.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^20.12.12",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "prisma": "^6.18.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}

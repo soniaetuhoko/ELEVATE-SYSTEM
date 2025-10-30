@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  student
+  mentor
+  admin
+}
+
+enum MissionStatus {
+  NotStarted
+  Planning
+  InProgress
+  NearCompletion
+  Completed
+}
+
+enum ProjectStatus {
+  Planning
+  InProgress
+  Completed
+}
+
+enum MoodType {
+  Productive
+  Insightful
+  Accomplished
+  Challenging
+  Inspired
+}
+
+enum CategoryType {
+  Technical
+  SoftSkills
+  Business
+}
+
+model User {
+  id          String       @id @default(cuid())
+  email       String       @unique
+  name        String
+  password    String?
+  role        Role         @default(student)
+  avatar      String?
+  missions    Mission[]
+  projects    Project[]
+  reflections Reflection[]
+  notifications Notification[]
+  adminLogs   AdminLog[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Mission {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  progress    Int           @default(0)
+  status      MissionStatus @default(Planning)
+  deadline    DateTime
+  category    CategoryType  @default(Technical)
+  attachments String[]
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projects    Project[]
+  reflections Reflection[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Project {
+  id            String        @id @default(cuid())
+  title         String
+  description   String
+  status        ProjectStatus @default(Planning)
+  progress      Int           @default(0)
+  startDate     DateTime
+  dueDate       DateTime
+  repositoryUrl String?
+  liveUrl       String?
+  technologies  String[]
+  attachments   String[]
+  missionId     String
+  mission       Mission       @relation(fields: [missionId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reflections   Reflection[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Reflection {
+  id           String   @id @default(cuid())
+  title        String
+  content      String
+  weekNumber   Int      @default(1)
+  keyLearnings String[]
+  challenges   String[]
+  improvements String[]
+  missionId    String?
+  mission      Mission? @relation(fields: [missionId], references: [id], onDelete: Cascade)
+  projectId    String?
+  project      Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Circle {
+  id          String       @id @default(cuid())
+  name        String
+  description String
+  members     Int          @default(1)
+  posts       Int          @default(0)
+  category    CategoryType @default(Technical)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  message   String
+  type      String
+  read      Boolean  @default(false)
+  data      Json?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model AdminLog {
+  id        String   @id @default(cuid())
+  action    String
+  details   String
+  targetId  String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
