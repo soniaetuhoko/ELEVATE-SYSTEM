@@ -10,7 +10,7 @@
 
 ---
 
-*A comprehensive learning and productivity platform that helps students plan missions, build portfolio projects, write reflections, and collaborate in peer circles—all while giving mentors and admins complete visibility through clear stats and profiles.*
+*A comprehensive learning and productivity platform that helps students plan missions, build portfolio projects, write reflections, and collaborate in peer circles, all while giving mentors and admins complete visibility through clear stats and profiles.*
 
 </div>
 
