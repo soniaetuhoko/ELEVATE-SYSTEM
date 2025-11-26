@@ -1,0 +1,453 @@
+{
+  "info": {
+    "name": "ELEVATE API Collection",
+    "description": "Complete API collection for ELEVATE learning platform with EmailJS-powered OTP delivery",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://elevate-system.onrender.com/api",
+      "type": "string"
+    },
+    {
+      "key": "local_url",
+      "value": "http://localhost:4000/api",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User (Any Email)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@gmail.com\",\n  \"name\": \"John Doe\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            },
+            "description": "Register with any email domain - OTP sent via EmailJS"
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@gmail.com\",\n  \"otp\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/verify-otp",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "verify-otp"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@gmail.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('jwt_token', response.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Missions",
+      "item": [
+        {
+          "name": "Get All Missions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/missions",
+              "host": ["{{base_url}}"],
+              "path": ["missions"]
+            }
+          }
+        },
+        {
+          "name": "Create Mission",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Learn React\",\n  \"description\": \"Master React fundamentals\",\n  \"deadline\": \"2024-12-31\",\n  \"category\": \"Technical\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/missions",
+              "host": ["{{base_url}}"],
+              "path": ["missions"]
+            }
+          }
+        },
+        {
+          "name": "Get Mission by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/missions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["missions", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "mission_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Mission",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Mission Title\",\n  \"progress\": 50\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/missions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["missions", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "mission_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Mission",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/missions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["missions", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "mission_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Get All Projects",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/projects",
+              "host": ["{{base_url}}"],
+              "path": ["projects"]
+            }
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"E-commerce App\",\n  \"description\": \"Full-stack e-commerce application\",\n  \"missionId\": \"mission_id_here\",\n  \"startDate\": \"2024-01-01\",\n  \"dueDate\": \"2024-03-01\",\n  \"technologies\": [\"React\", \"Node.js\", \"MongoDB\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projects",
+              "host": ["{{base_url}}"],
+              "path": ["projects"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reflections",
+      "item": [
+        {
+          "name": "Get All Reflections",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/reflections",
+              "host": ["{{base_url}}"],
+              "path": ["reflections"]
+            }
+          }
+        },
+        {
+          "name": "Create Reflection",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Week 1 Reflection\",\n  \"content\": \"This week I learned about React hooks...\",\n  \"keyLearnings\": [\"useState\", \"useEffect\"],\n  \"challenges\": [\"State management\"],\n  \"improvements\": [\"Practice more with hooks\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/reflections",
+              "host": ["{{base_url}}"],
+              "path": ["reflections"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/profile/me",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "me"]
+            }
+          }
+        },
+        {
+          "name": "Get User Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/profile/stats",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profile/me",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search & Stats",
+      "item": [
+        {
+          "name": "Search Content",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/search?q=react",
+              "host": ["{{base_url}}"],
+              "path": ["search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "react"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Platform Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/stats",
+              "host": ["{{base_url}}"],
+              "path": ["stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Collaboration",
+      "item": [
+        {
+          "name": "Get Circles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/circles",
+              "host": ["{{base_url}}"],
+              "path": ["circles"]
+            }
+          }
+        },
+        {
+          "name": "Get Mentors",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/mentors",
+              "host": ["{{base_url}}"],
+              "path": ["mentors"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "File Upload",
+      "item": [
+        {
+          "name": "Upload Profile Picture",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/upload/profile",
+              "host": ["{{base_url}}"],
+              "path": ["upload", "profile"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin (Admin Only)",
+      "item": [
+        {
+          "name": "Get Admin Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/stats",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

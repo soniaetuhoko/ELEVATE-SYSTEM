@@ -1,0 +1,1275 @@
+{
+  "info": {
+    "name": "ELEVATE API Collection",
+    "description": "Complete API collection for ELEVATE learning platform",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://elevate-system.onrender.com/api",
+      "type": "string"
+    },
+    {
+      "key": "local_url",
+      "value": "http://localhost:4000/api",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"student@alustudent.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newstudent@alustudent.com\",\n  \"name\": \"New Student\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newstudent@alustudent.com\",\n  \"otp\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/verify-otp",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "verify-otp"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/profile/me",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "me"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profile/me",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "me"]
+            }
+          }
+        },
+        {
+          "name": "Get User Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/profile/stats",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Update Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"oldpassword\",\n  \"newPassword\": \"newpassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profile/password",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "password"]
+            }
+          }
+        },
+        {
+          "name": "Update Notification Settings",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailNotifications\": true,\n  \"mentorFeedback\": true,\n  \"deadlineReminders\": true,\n  \"collaborationUpdates\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profile/notifications",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "notifications"]
+            }
+          }
+        },
+        {
+          "name": "Update Preferences",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timezone\": \"UTC\",\n  \"language\": \"en\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profile/preferences",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "preferences"]
+            }
+          }
+        },
+        {
+          "name": "Get Preferences",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/profile/preferences",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "preferences"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missions",
+      "item": [
+        {
+          "name": "Get Missions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/missions?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["missions"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Mission",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Learn React\",\n  \"description\": \"Master React fundamentals\",\n  \"deadline\": \"2024-12-31T23:59:59.000Z\",\n  \"category\": \"Technical\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/missions",
+              "host": ["{{base_url}}"],
+              "path": ["missions"]
+            }
+          }
+        },
+        {
+          "name": "Get Mission by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/missions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["missions", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "mission_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Mission",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Mission Title\",\n  \"progress\": 50\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/missions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["missions", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "mission_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Mission",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/missions/:id",
+              "host": ["{{base_url}}"],
+              "path": ["missions", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "mission_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Get Projects",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/projects?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["projects"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Portfolio Website\",\n  \"description\": \"Personal portfolio website\",\n  \"startDate\": \"2024-01-01T00:00:00.000Z\",\n  \"dueDate\": \"2024-03-01T23:59:59.000Z\",\n  \"missionId\": \"mission_id_here\",\n  \"technologies\": [\"React\", \"TypeScript\", \"TailwindCSS\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projects",
+              "host": ["{{base_url}}"],
+              "path": ["projects"]
+            }
+          }
+        },
+        {
+          "name": "Get Project by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/projects/:id",
+              "host": ["{{base_url}}"],
+              "path": ["projects", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "project_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"progress\": 75,\n  \"status\": \"In Progress\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projects/:id",
+              "host": ["{{base_url}}"],
+              "path": ["projects", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "project_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/projects/:id",
+              "host": ["{{base_url}}"],
+              "path": ["projects", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "project_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reflections",
+      "item": [
+        {
+          "name": "Get Reflections",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/reflections?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["reflections"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Reflection",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Week 1 Reflection\",\n  \"content\": \"This week I learned about React components...\",\n  \"weekNumber\": 1,\n  \"keyLearnings\": [\"React components\", \"State management\"],\n  \"challenges\": [\"Understanding hooks\"],\n  \"improvements\": [\"Practice more with useState\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/reflections",
+              "host": ["{{base_url}}"],
+              "path": ["reflections"]
+            }
+          }
+        },
+        {
+          "name": "Get Reflection by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/reflections/:id",
+              "host": ["{{base_url}}"],
+              "path": ["reflections", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "reflection_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Reflection",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Updated reflection content...\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/reflections/:id",
+              "host": ["{{base_url}}"],
+              "path": ["reflections", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "reflection_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Reflection",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/reflections/:id",
+              "host": ["{{base_url}}"],
+              "path": ["reflections", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "reflection_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Staff",
+      "item": [
+        {
+          "name": "Get Students",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/staff/students",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "students"]
+            }
+          }
+        },
+        {
+          "name": "Get Staff Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/staff/stats",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get Mentorship Requests",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/staff/mentorship-requests",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "mentorship-requests"]
+            }
+          }
+        },
+        {
+          "name": "Accept Mentorship Request",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/staff/mentorship-requests/:id/accept",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "mentorship-requests", ":id", "accept"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "request_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Decline Mentorship Request",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/staff/mentorship-requests/:id/decline",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "mentorship-requests", ":id", "decline"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "request_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Student Missions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/staff/missions",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "missions"]
+            }
+          }
+        },
+        {
+          "name": "Get Student Projects",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/staff/projects",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "projects"]
+            }
+          }
+        },
+        {
+          "name": "Get Student Reflections",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/staff/reflections",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "reflections"]
+            }
+          }
+        },
+        {
+          "name": "Add Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Great work on this mission! Keep it up.\",\n  \"type\": \"mission\",\n  \"itemId\": \"mission_id_here\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/staff/comments",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "comments"]
+            }
+          }
+        },
+        {
+          "name": "Get Comments",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/staff/comments/:type/:itemId",
+              "host": ["{{base_url}}"],
+              "path": ["staff", "comments", ":type", ":itemId"],
+              "variable": [
+                {
+                  "key": "type",
+                  "value": "mission"
+                },
+                {
+                  "key": "itemId",
+                  "value": "mission_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Get My Comments",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/comments/my/:type/:itemId",
+              "host": ["{{base_url}}"],
+              "path": ["comments", "my", ":type", ":itemId"],
+              "variable": [
+                {
+                  "key": "type",
+                  "value": "mission"
+                },
+                {
+                  "key": "itemId",
+                  "value": "mission_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Achievements",
+      "item": [
+        {
+          "name": "Get Achievements",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/achievements",
+              "host": ["{{base_url}}"],
+              "path": ["achievements"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Search Content",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/search?q=react",
+              "host": ["{{base_url}}"],
+              "path": ["search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "react"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/notifications",
+              "host": ["{{base_url}}"],
+              "path": ["notifications"]
+            }
+          }
+        },
+        {
+          "name": "Mark Notification as Read",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{base_url}}/notifications/:id/read",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", ":id", "read"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "notification_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Circles",
+      "item": [
+        {
+          "name": "Get Circles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/circles",
+              "host": ["{{base_url}}"],
+              "path": ["circles"]
+            }
+          }
+        },
+        {
+          "name": "Create Circle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"React Developers\",\n  \"description\": \"Circle for React developers\",\n  \"category\": \"Technical\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/circles",
+              "host": ["{{base_url}}"],
+              "path": ["circles"]
+            }
+          }
+        },
+        {
+          "name": "Get Circle by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/circles/:id",
+              "host": ["{{base_url}}"],
+              "path": ["circles", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "circle_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Join Circle",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/circles/:id/join",
+              "host": ["{{base_url}}"],
+              "path": ["circles", ":id", "join"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "circle_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Leave Circle",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/circles/:id/leave",
+              "host": ["{{base_url}}"],
+              "path": ["circles", ":id", "leave"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "circle_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Circle Posts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/circles/:id/posts",
+              "host": ["{{base_url}}"],
+              "path": ["circles", ":id", "posts"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "circle_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Circle Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Hello everyone! Excited to be part of this circle.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/circles/:id/posts",
+              "host": ["{{base_url}}"],
+              "path": ["circles", ":id", "posts"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "circle_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Upload",
+      "item": [
+        {
+          "name": "Upload Profile Picture",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/upload/profile",
+              "host": ["{{base_url}}"],
+              "path": ["upload", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Upload Project Attachment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/upload/project",
+              "host": ["{{base_url}}"],
+              "path": ["upload", "project"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documentation",
+      "item": [
+        {
+          "name": "Download User Manual",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/docs/manual",
+              "host": ["{{base_url}}"],
+              "path": ["docs", "manual"]
+            }
+          }
+        },
+        {
+          "name": "Get Help Content",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/docs/help",
+              "host": ["{{base_url}}"],
+              "path": ["docs", "help"]
+            }
+          }
+        },
+        {
+          "name": "Get Performance Metrics",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/docs/performance",
+              "host": ["{{base_url}}"],
+              "path": ["docs", "performance"]
+            }
+          }
+        },
+        {
+          "name": "Get User Preferences",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/docs/preferences",
+              "host": ["{{base_url}}"],
+              "path": ["docs", "preferences"]
+            }
+          }
+        },
+        {
+          "name": "Mark Onboarding Complete",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/docs/onboarding",
+              "host": ["{{base_url}}"],
+              "path": ["docs", "onboarding"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stats",
+      "item": [
+        {
+          "name": "Get Platform Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/stats",
+              "host": ["{{base_url}}"],
+              "path": ["stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mentors",
+      "item": [
+        {
+          "name": "Get Mentors",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/mentors",
+              "host": ["{{base_url}}"],
+              "path": ["mentors"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Admin Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/stats",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users"]
+            }
+          }
+        },
+        {
+          "name": "Export Data as PDF",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/export/pdf",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "export", "pdf"]
+            }
+          }
+        },
+        {
+          "name": "Export Data as CSV",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/export/csv",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "export", "csv"]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@alustudent.com\",\n  \"role\": \"student\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users"]
+            }
+          }
+        },
+        {
+          "name": "Get User Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/users/:id",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "user_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Smith\",\n  \"email\": \"johnsmith@alustudent.com\",\n  \"role\": \"mentor\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/users/:id",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "user_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/admin/users/:id",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "user_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User Role",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/users/:id/role",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users", ":id", "role"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "user_id_here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Admin Circles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/circles",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "circles"]
+            }
+          }
+        },
+        {
+          "name": "Create Admin Circle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Admin Circle\",\n  \"description\": \"Circle created by admin\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/circles",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "circles"]
+            }
+          }
+        },
+        {
+          "name": "Delete Admin Circle",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/admin/circles/:id",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "circles", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "circle_id_here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVATE OTP</title>
+    <style>
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { color: #007acc; margin: 0; }
+        .subtitle { color: #666; margin: 5px 0; }
+        .content { background: #f9f9f9; padding: 30px; border-radius: 10px; }
+        .welcome { color: #333; margin-top: 0; }
+        .message { color: #555; font-size: 16px; line-height: 1.5; }
+        .otp-box { background: #007acc; color: white; padding: 20px; text-align: center; border-radius: 8px; margin: 25px 0; }
+        .otp-code { margin: 0; font-size: 36px; letter-spacing: 8px; }
+        .footer-text { color: #555; font-size: 14px; line-height: 1.5; }
+        .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; }
+        .footer-info { color: #888; font-size: 12px; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="logo">ELEVATE</h1>
+            <p class="subtitle">Mission-Driven Learning Platform</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="welcome">Welcome, {{name}}!</h2>
+            
+            <p class="message">
+                Your one-time password (OTP) for logging into ELEVATE is:
+            </p>
+            
+            <div class="otp-box">
+                <h1 class="otp-code">{{otp}}</h1>
+            </div>
+            
+            <p class="footer-text">
+                This code will expire in <strong>5 minutes</strong>. If you didn't request this code, please ignore this email.
+            </p>
+            
+            <div class="footer">
+                <p class="footer-info">
+                    This email was sent to: {{email}}<br>
+                    From: ELEVATE Platform
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- 
+TEMPLATE SETTINGS:
+- To Email: {{email}}
+- To Name: {{name}}
+- Subject: OTP for your ELEVATE authentication
+
+VARIABLES USED:
+- {{name}} - User's name
+- {{email}} - User's email address  
+- {{otp}} - The OTP code
+-->
