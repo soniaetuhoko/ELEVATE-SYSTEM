@@ -380,6 +380,33 @@ sequenceDiagram
 
 ---
 
+### Login Instructions (For Testing & Demo Purposes)**
+
+To access the system during testing or demo:
+
+👨‍🏫 **Staff / Mentor Login**
+
+Use any @alu.edu email
+
+Example: mentor@alu.edu
+
+You will receive an OTP code in your email for authentication.
+
+🎓 **Student Login**
+
+Use your @alustudent.com email OR any personal email
+
+Example: student@alustudent.com or gmail.com
+
+Check your inbox for the OTP verification code.
+
+👨‍💼** Admin Login**
+
+Use the predefined credentials below:
+
+Email: admin@admin.com  
+Password: admin123
+
 ## 📊 **Development Scripts**
 
 <div align="center">
