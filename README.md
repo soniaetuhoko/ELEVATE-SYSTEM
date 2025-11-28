@@ -522,8 +522,5 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ### 🌟 **Made with ❤️ for ALU Students**
 
 *Empowering the next generation of African leaders through technology and innovation.*
-
-[![GitHub stars](https://img.shields.io/github/stars/manziosee/ELEVATE-system?style=social)](https://github.com/manziosee/ELEVATE-system)
-[![GitHub forks](https://img.shields.io/github/forks/manziosee/ELEVATE-system?style=social)](https://github.com/manziosee/ELEVATE-system)
-
+-
 </div>
